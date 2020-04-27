@@ -8,7 +8,7 @@ namespace Commander
 {
   public class CommandCollection
   {
-    private Dictionary<User, DateTime> _lastUsed;
+    private Dictionary<UserAccount, DateTime> _lastUsed;
 
     public string[] Aliases { get; set; }
 
@@ -63,10 +63,10 @@ namespace Commander
         throw new CommandException(CommandError.NotEnoughParameters, ExpectedParameterCount);
 
       if (Cooldown != 0 && _lastUsed == null)
-        _lastUsed = new Dictionary<User, DateTime>();
+        _lastUsed = new Dictionary<UserAccount, DateTime>();
 
-      if (executor.User != null && Cooldown != 0 &&
-          _lastUsed.TryGetValue(executor.User, out DateTime lastUsed) &&
+      if (executor.Account != null && Cooldown != 0 &&
+          _lastUsed.TryGetValue(executor.Account, out DateTime lastUsed) &&
           (DateTime.Now - lastUsed).TotalSeconds < Cooldown)
         throw new CommandException(CommandError.Cooldown,
           Math.Round(Cooldown - (DateTime.Now - lastUsed).TotalSeconds));
@@ -76,8 +76,8 @@ namespace Commander
 
       if (!AllowServer && !executor.ConnectionAlive) return;
 
-      if (executor.User != null && Cooldown != 0)
-        _lastUsed[executor.User] = DateTime.Now;
+      if (executor.Account != null && Cooldown != 0)
+        _lastUsed[executor.Account] = DateTime.Now;
 
       var target = executor.RealPlayer ? new CommandExecutor(executor.Index) : new CommandExecutorServer();
 
