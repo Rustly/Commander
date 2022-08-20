@@ -38,8 +38,8 @@ namespace Commander
       new Dictionary<string, Func<CommandExecutor, string>>
       {
         {"player", ex => "\"" + (ex.RealPlayer ? ex.Name : "Server") + "\""},
-        {"user", ex => ex.User?.Name ?? ""},
-        {"group", ex => ex.User?.Group ?? "Unregistered"},
+        {"user", ex => ex.Account?.Name ?? ""},
+        {"group", ex => ex.Account?.Group ?? "Unregistered"},
         {"x", ex => ex.X.ToString(CultureInfo.InvariantCulture)},
         {"y", ex => ex.Y.ToString(CultureInfo.InvariantCulture)},
         {"wx", ex => ex.TileX.ToString()},

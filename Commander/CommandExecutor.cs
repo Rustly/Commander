@@ -9,7 +9,7 @@ namespace Commander
     public CommandExecutorServer() : base("Server")
     {
       Group = new SuperAdminGroup();
-      User = Server.User;
+            Account = Server.Account;
     }
 
     public override void SendMessage(string msg, Color color)
@@ -45,7 +45,7 @@ namespace Commander
         AwaitingNameParameters = null;
         AwaitingTempPoint = 0;
 
-        User = null;
+                Account = null;
         Group = Group.DefaultGroup;
       }
       else
@@ -55,7 +55,7 @@ namespace Commander
         AwaitingNameParameters = player.AwaitingNameParameters;
         AwaitingTempPoint = player.AwaitingTempPoint;
 
-        User = player.User;
+                Account = player.Account;
         Group = player.Group;
         tempGroup = player.tempGroup;
       }
