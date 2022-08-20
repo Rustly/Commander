@@ -91,7 +91,11 @@ namespace Commander
       if (Sudo)
         exc.Group = new SuperAdminGroup();
 
+            var cmd = Commands.ChatCommands.Find(x => x.HasAlias(args.First()));
+            var oldState = cmd.DoLog;
+            cmd.DoLog = false;
       var result = Commands.HandleCommand(exc, fullcmd);
+            cmd.DoLog = oldState;
 
       if (Sudo)
         exc.Group = oldGroup;
